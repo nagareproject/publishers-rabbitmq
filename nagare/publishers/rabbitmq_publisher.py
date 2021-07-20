@@ -31,12 +31,12 @@ class Publisher(publisher.Publisher):
         banner = super(Publisher, self).generate_banner()
         return banner + ' on channel `{}`'.format(self.plugin_config['channel'])
 
-    def _serve(self, app, channel, **conf):
+    def _serve(self, app, channel, services_service, **conf):
         super(Publisher, self)._serve(app)
 
         rabbitmq_channel = self.services[channel]
         rabbitmq_channel.on_receive(
-            lambda msg: self.start_handle_request(app, channel=rabbitmq_channel, msg=msg)
+            lambda msg: self.start_handle_request(app, services_service, channel=rabbitmq_channel, msg=msg)
         )
 
         try:
