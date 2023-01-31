@@ -7,17 +7,16 @@
 # this distribution.
 # --
 
-"""The RabbitMQ publisher"""
+"""The RabbitMQ publisher."""
 
 from nagare.server import publisher
 
 
 class Publisher(publisher.Publisher):
-    """The RabbitMQ publisher"""
+    """The RabbitMQ publisher."""
 
     CONFIG_SPEC = dict(
-        publisher.Publisher.CONFIG_SPEC,
-        channel='string(help="name of the channel service to listen to")'
+        publisher.Publisher.CONFIG_SPEC, channel='string(help="name of the channel service to listen to")'
     )
     has_multi_threads = True
 

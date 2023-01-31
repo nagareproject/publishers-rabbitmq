@@ -1,0 +1,2 @@
+[nagare.publishers]
+rabbitmq = nagare.publishers.rabbitmq_publisher:Publisher
