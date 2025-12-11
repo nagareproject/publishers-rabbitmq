@@ -1,5 +1,5 @@
 # --
-# Copyright (c) 2008-2024 Net-ng.
+# Copyright (c) 2014-2025 Net-ng.
 # All rights reserved.
 #
 # This software is licensed under the BSD License, as described in
@@ -15,23 +15,23 @@ from nagare.server import publisher
 class Publisher(publisher.Publisher):
     """The RabbitMQ publisher."""
 
-    CONFIG_SPEC = dict(
-        publisher.Publisher.CONFIG_SPEC, channel='string(help="name of the channel service to listen to")'
-    )
+    CONFIG_SPEC = publisher.Publisher.CONFIG_SPEC | {
+        'channel': 'string(help="name of the channel service to listen to")'
+    }
     has_multi_threads = True
 
     def __init__(self, name, dist, rabbitmq_service, services_service, **config):
-        super(Publisher, self).__init__(name, dist, **config)
+        super().__init__(name, dist, **config)
 
         self.rabbitmq = rabbitmq_service
         self.services = services_service
 
     def generate_banner(self):
-        banner = super(Publisher, self).generate_banner()
+        banner = super().generate_banner()
         return banner + ' on channel `{}`'.format(self.plugin_config['channel'])
 
     def _serve(self, app, channel, services_service, **conf):
-        super(Publisher, self)._serve(app)
+        super()._serve(app)
 
         rabbitmq_channel = self.services[channel]
         rabbitmq_channel.on_receive(
