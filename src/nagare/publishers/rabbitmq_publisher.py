@@ -9,7 +9,7 @@
 
 """The RabbitMQ publisher."""
 
-from nagare.server import publisher
+from nagare.publishers import publisher
 
 
 class Publisher(publisher.Publisher):
